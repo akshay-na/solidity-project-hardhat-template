@@ -1,0 +1,81 @@
+#! /bin/zsh
+
+URL=$1
+
+fork=false
+unlock=false
+network=
+networkURL=
+accounts=
+
+command="npx hardhat node --show-stack-traces"
+
+function load_dotenv(){
+  set -a
+  source <(cat .env | sed -e '/^#/d;/^\s*$/d' -e "s/'/'\\\''/g" -e "s/=\(.*\)/='\1'/g")
+  set +a
+}
+
+if [ -z $MNEMONIC ]
+then
+load_dotenv
+fi
+
+Help()
+{
+   # Display Help
+   echo "Custom hardhat network script to easily fork any chain from .env file."
+   echo
+   echo "Syntax: ./hardhat_node [option] [args]"
+   echo
+   echo "[Options]"
+   echo
+   echo "-n     Networks: eth, bsc, polygon, smartbch"
+   echo         "For testnets add _testnet. Example: bsc_testnet"
+   echo "-h     Print this Help."
+   echo
+}
+
+
+while getopts "hn:" option; do
+   case $option in
+      h) # display Help
+         Help
+         exit;;
+      n) # Enter networkname
+         fork=true
+         network=$OPTARG;;
+      \?) # Invalid option
+         echo "Error: Invalid option. Please refer Help page"
+         Help
+         exit;;
+   esac
+done
+
+
+case $network in
+      "eth")
+         networkURL=$ETH_MAINNET_NOWNODE$NOWNODES_API;;
+      "eth_testnet")
+         networkURL=$ETH_TESTNET_NOWNODE$NOWNODES_API;;
+      "bsc")
+         networkURL=$BSC_MAINNET_NOWNODE$NOWNODES_API;;
+      "bsc_testnet")
+         networkURL=$BSC_TESTNET_NOWNODE$NOWNODES_API;;
+      "polygon")
+         networkURL=$POLYGON_MAINNET;;
+      "polygon_testnet")
+         networkURL=$POLYGON_TESTNET;;
+      "smartbch")
+         networkURL=$SMARTBCH_MAINNET;;
+      "smartbch_testnet")
+         networkURL=$SMARTBCH_TESTNET;;
+esac
+
+
+if [ $fork ]
+then
+eval $command --fork $networkURL
+else
+eval $command
+fi
