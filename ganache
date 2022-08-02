@@ -8,7 +8,7 @@ network=
 networkURL=
 accounts=
 
-command="npx hardhat node --show-stack-traces"
+command="npx ganache --defaultBalanceEther 90000000000000 -v -m \$MNEMONIC"
 
 function load_dotenv(){
   set -a
@@ -24,20 +24,21 @@ fi
 Help()
 {
    # Display Help
-   echo "Custom hardhat network script to easily fork any chain from .env file."
+   echo "Custom Ganache script to easily fork any chain from .env file."
    echo
-   echo "Syntax: ./hardhat_node [option] [args]"
+   echo "Syntax: ./ganache [option] [args]"
    echo
    echo "[Options]"
    echo
    echo "-n     Networks: eth, bsc, polygon, smartbch"
    echo         "For testnets add _testnet. Example: bsc_testnet"
    echo "-h     Print this Help."
+   echo "-u     unlocks the given accounts."
    echo
 }
 
 
-while getopts "hn:" option; do
+while getopts "hn:u:" option; do
    case $option in
       h) # display Help
          Help
@@ -45,6 +46,9 @@ while getopts "hn:" option; do
       n) # Enter networkname
          fork=true
          network=$OPTARG;;
+      u) # unlock accounts
+         unlock=true
+         accounts=$OPTARG;;
       \?) # Invalid option
          echo "Error: Invalid option. Please refer Help page"
          Help
@@ -72,10 +76,15 @@ case $network in
          networkURL=$SMARTBCH_TESTNET;;
 esac
 
-
-if [ $fork ]
+if [ $fork ] && [ $unlock ]
 then
-eval $command --fork $networkURL
+eval $command -f $networkURL --unlock $accounts
+elif [ $fork ] && [ $unlock = false ]
+then
+eval $command -f $networkURL
+elif [ $fork = false ] && [ $unlock ]
+then
+eval $command --unlock $accounts
 else
 eval $command
 fi

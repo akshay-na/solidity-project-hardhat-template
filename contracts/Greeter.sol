@@ -6,10 +6,12 @@ import "hardhat/console.sol";
 contract Greeter {
     string private greeting;
 
-    constructor(string memory _greeting) {
+    constructor(string memory _greeting) payable {
         console.log("Deploying a Greeter with greeting:", _greeting);
         greeting = _greeting;
     }
+
+    receive() external payable {}
 
     function greet() public view returns (string memory) {
         return greeting;
