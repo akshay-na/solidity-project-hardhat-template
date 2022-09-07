@@ -68,28 +68,35 @@ module.exports = {
     // ==> Mainnets
 
     ETH_mainnet: {
-      url: process.env.ETH_MAINNET_NOWNODE + process.env.NOWNODES_API,
+      url: process.env.ETH_MAINNET_GETBLOCK + process.env.GETBLOCK_API,
       accounts: { mnemonic: mnemonic },
       gas: "auto", // Limit the gas to x number.
       gasPrice: "auto", // 25 gwei (in wei) (default: 100 gwei)
     },
 
     BSC_mainnet: {
-      url: process.env.BSC_MAINNET_NOWNODE + process.env.NOWNODES_API,
+      url: process.env.BSC_MAINNET_GETBLOCK + process.env.GETBLOCK_API,
       accounts: { mnemonic: mnemonic },
       gas: "auto", // Limit the gas to x number.
       gasPrice: "auto", // 25 gwei (in wei) (default: 100 gwei)
     },
 
-    SmartBCH_mainnet: {
-      url: process.env.SMARTBCH_MAINNET,
+    POLYGON_mainnet: {
+      url: process.env.POLYGON_MAINNET_GETBLOCK + process.env.GETBLOCK_API,
       accounts: { mnemonic: mnemonic },
       gas: "auto", // Limit the gas to x number.
       gasPrice: "auto", // 25 gwei (in wei) (default: 100 gwei)
     },
 
-    Polygon_mainnet: {
-      url: process.env.POLYGON_MAINNET,
+    FTM_mainnet: {
+      url: process.env.FHANTOM_MAINNET_GETBLOCK + process.env.GETBLOCK_API,
+      accounts: { mnemonic: mnemonic },
+      gas: "auto", // Limit the gas to x number.
+      gasPrice: "auto", // 25 gwei (in wei) (default: 100 gwei)
+    },
+
+    OP_mainnet: {
+      url: process.env.OPTIMISM_MAINNET_GETBLOCK + process.env.GETBLOCK_API,
       accounts: { mnemonic: mnemonic },
       gas: "auto", // Limit the gas to x number.
       gasPrice: "auto", // 25 gwei (in wei) (default: 100 gwei)
@@ -97,29 +104,50 @@ module.exports = {
 
     // ==> Testnets
 
-    ETH_testnet: {
-      url: process.env.ETH_TESTNET_NOWNODE + process.env.NOWNODES_API,
+    ETH_goerli: {
+      url: process.env.ETH_TESTNET_GOERLI_GETBLOCK + process.env.GETBLOCK_API,
+      accounts: { mnemonic: mnemonic },
+      gas: "auto", // Limit the gas to x number.
+      gasPrice: "auto", // 25 gwei (in wei) (default: 100 gwei)
+    },
+
+    ETH_kovan: {
+      url: process.env.ETH_TESTNET_KOVAN_GETBLOCK + process.env.GETBLOCK_API,
+      accounts: { mnemonic: mnemonic },
+      gas: "auto", // Limit the gas to x number.
+      gasPrice: "auto", // 25 gwei (in wei) (default: 100 gwei)
+    },
+
+    ETH_rinkeby: {
+      url: process.env.ETH_TESTNET_RINKEBY_GETBLOCK + process.env.GETBLOCK_API,
+      accounts: { mnemonic: mnemonic },
+      gas: "auto", // Limit the gas to x number.
+      gasPrice: "auto", // 25 gwei (in wei) (default: 100 gwei)
+    },
+
+    ETH_ropsten: {
+      url: process.env.ETH_TESTNET_ROPSTEN_GETBLOCK + process.env.GETBLOCK_API,
       accounts: { mnemonic: mnemonic },
       gas: "auto", // Limit the gas to x number.
       gasPrice: "auto", // 25 gwei (in wei) (default: 100 gwei)
     },
 
     BSC_testnet: {
-      url: process.env.BSC_TESTNET_NOWNODE,
-      accounts: { mnemonic: mnemonic },
-      gas: "auto", // Limit the gas to x number.
-      gasPrice: "auto", // 25 gwei (in wei) (default: 100 gwei)
-    },
-
-    SmartBCH_testnet: {
-      url: process.env.SMARTBCH_TESTNET,
+      url: process.env.BSC_TESTNET_GETBLOCK + process.env.GETBLOCK_API,
       accounts: { mnemonic: mnemonic },
       gas: "auto", // Limit the gas to x number.
       gasPrice: "auto", // 25 gwei (in wei) (default: 100 gwei)
     },
 
     Polygon_testnet: {
-      url: process.env.POLYGON_TESTNET,
+      url: process.env.POLYGON_TESTNET_GETBLOCK + process.env.GETBLOCK_API,
+      accounts: { mnemonic: mnemonic },
+      gas: "auto", // Limit the gas to x number.
+      gasPrice: "auto", // 25 gwei (in wei) (default: 100 gwei)
+    },
+
+    OP_testnet: {
+      url: process.env.OPTIMISM_TESTNET_GETBLOCK + process.env.GETBLOCK_API,
       accounts: { mnemonic: mnemonic },
       gas: "auto", // Limit the gas to x number.
       gasPrice: "auto", // 25 gwei (in wei) (default: 100 gwei)
